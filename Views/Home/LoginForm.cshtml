@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using BeltExam.Models
+@model Login
+<div class="container jumbotron text-center">
+  <div class="row">
+    <div class="col-sm">
+      <img src="./StreetTacos.jpg">
+    </div>
+    <div class="col-sm">
+      <h1>Welcome to CRUD-Delicious!</h1>
+      <h4>Login Page</h4>
+      <a href="/"> Go to Registration page</a>
+
+    </div>
+    <div class="col-sm">
+      <img src="./peperonipizza.jpg">
+    </div>
+  </div>
+</div>
+<div id="outer">
+    <div class="b" id="inner">
+        <div class="t">
+        <table class="table table-bordered table-striped">
+            <tbody><td>
+            <h2>Login: (@ViewBag.Attempts attemps.)</h2>
+            <form asp-action="Login" asp-controller="Home" method="post">
+                <span asp-validation-for="Email"></span>
+                <label asp-for="Email"></label><br>
+                <input asp-for="Email">
+                <span asp-validation-for="Password"></span>
+                <label asp-for="Password"></label>
+                <input asp-for="Password">
+                <input value="Login" type="submit">    
+            </form>        
+            </td>
+            </tbody>
+        </table>
+        </div> 
+    </div>
+    <div id="clearit"></div>     
+</div>

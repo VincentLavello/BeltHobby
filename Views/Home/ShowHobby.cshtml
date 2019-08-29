@@ -1,0 +1,57 @@
+@{ViewData["Title"] = "Hobby";}
+@model Hobby;
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <span style="color:blue" ><h1>@Model.HobbyTitle</h1></span>
+  </div>
+</div>
+<hr>
+<h3>Description</h3>
+  <div class="row">
+    <div class="col-sm-12">
+    <textarea rows="4" cols="50"> @Model.Description</textarea>
+      </div>
+</div>
+<div class="container"> 
+    <div class="row">
+        <u><h2>@Model.HobbyTitle Enthusiasts:</h2></u>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+</div>
+    <form asp-action="AddHobby" asp-controller="Home"   method="post">
+    <span class="text-danger" asp-validation-for="@Model.Proficiency"></span>
+    <select asp-for="@Model.Proficiency">
+        <option value="1">Novice</option>
+        <option value="2">Intermediate</option>
+        <option value="3">Expert</option>
+    </select>                 
+     <input type="hidden" id="HobbyID" name="HobbyID" value=@Model.HobbyID>
+    <input value="AddHobby" type="submit">    
+    </form>     
+  
+  <!-- <a href="/AddHobby/@Model.HobbyID" type="button" value="AddHobby"> Add to Hobbies </a> -->
+  <a href="/ViewEditHobby/@Model.HobbyID" type="button" value="EditHobby"> Edit this Hobby </a>
+
+  <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+          <th>Name</th>
+          <th>Proficiency</th>
+      </tr>
+      </thead>
+      <tbody class="table table-striped table-hover ">
+          @{ 
+              @foreach(Enthusiast h in @Model.Members) {
+                  string id = @Model.HobbyID.ToString();
+                  <tr>
+                      <td>@h.Hobbyist.FirstName</td>
+                      <td>@h.Proficiency</td>
+                  </tr>
+              }
+          }
+      </tbody>
+  </table>

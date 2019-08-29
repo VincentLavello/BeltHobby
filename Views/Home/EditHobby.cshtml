@@ -1,0 +1,27 @@
+@model Hobby
+
+<div class="container">
+  <div class="row">
+      <h1>Edit this Hobby</h1>
+  </div>
+</div>
+<hr>
+<div id="outer">
+    <div class="b" id="inner">
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <div class="form-group">
+            <form asp-action="EditHobby" asp-controller="Home" asp-route-id="@Model.HobbyID" method="post">
+                <br><label asp-for="@Model.HobbyTitle"></label><br>
+                <span class="text-danger" asp-validation-for="@Model.HobbyTitle"></span>
+                <input asp-for="@Model.HobbyTitle" value=@Model.HobbyTitle>
+                <br><label asp-for="@Model.Description"></label><br>
+                <span class="text-danger" asp-validation-for="@Model.Description"></span>
+                <textarea asp-for="@Model.Description">@Model.Description</textarea>
+                <input value="Update" type="submit" >    
+            </form>      
+            </div></td>
+        </tbody>
+    </table>        
+    </div>
+    <div id="clearit"></div>

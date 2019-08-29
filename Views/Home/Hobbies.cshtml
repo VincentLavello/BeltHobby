@@ -1,0 +1,40 @@
+@using BeltExam.Models;
+@model List<Hobby>
+<div class="container">
+  <div class="row">
+      <h1>Hobbies </h1>
+  </div>
+   
+</div>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Enthusiasts</th>
+            </tr>
+            </thead>
+            <tbody class="table table-striped table-hover ">
+                @{ 
+                    @foreach(var hobby in @Model) {
+                        string id = @hobby.HobbyID.ToString();
+                        <tr>
+                            <td><a href="/ShowHobby/@id">@hobby.HobbyTitle</a></td>
+                            <td>@hobby.Members.Count</td>
+                        </tr>
+                    }
+                }
+            <tr><td colspan="5"><a href="/ViewNewHobby" id="NewHobby" type=button>New Hobby</a></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-6">
+      LEADER BOARD
+    </div>
+  </div>
+</div>
+
+

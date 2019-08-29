@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Success Page";
+}
+@using BeltExam.Models
+@model User
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <a href="/logout">Log out<a></a></div>
+    <div class="col-sm-10"></div>
+  </div>
+</div>
+<div  id="main"> 
+    <h1 class="masthead"><div style="text-align: center;">
+    <img src="~/dojoblack.png" alt="dojoblack" style="border:0px none ; border-width: 0px; height: 150px; width: 200px; margin: 0; padding: 0;" ></div></h1>
+    <div id="templateBody" class="bodyContent rounded6">
+        <h1>Submitted Info:</h1>
+        <label>Email:</label><p>@Model.Email</p>
+    </div>
+</div>
