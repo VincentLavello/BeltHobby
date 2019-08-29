@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Runtime.InteropServices;
+using System.Linq.Expressions;
 using System.Xml.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Net;
@@ -39,16 +40,9 @@ namespace BeltExam.Controllers
     { if (IsLoggedIn)
         {
 
-            // List<Hobby> All = dbContext.Activities.OrderBy(r=>r.ActivityDate)
-            //                     .Where(d => d.ActivityDate > DateTime.Now)
-            //                     .Include(c=>c.Coordinator )
-            //                     .Include(p=>p.Particpants)
-            //                         .ThenInclude(u=>u.Participant)
-            //                     .ToList();
             List<Hobby> All = dbContext.Hobbies
                                 .Include(h => h.Members )
                                 .ToList();
-            // ViewBag.UserId=this.LoggedInUserID;
 
             return View("Hobbies", All);
         }
@@ -89,17 +83,18 @@ namespace BeltExam.Controllers
         int HobbyID = EditHobby.HobbyID;
 
         if ( ModelState.IsValid  )  {
-     
-            dbContext.Hobbies.Update(EditHobby);
+
+            Hobby curr = dbContext.Hobbies.FirstOrDefault(h => h.HobbyID==HobbyID);
+            curr.Description = EditHobby.Description ;
+            curr.HobbyTitle=EditHobby.HobbyTitle;
+
+            dbContext.Hobbies.Update(curr);
             dbContext.SaveChanges();
         }
  
     return RedirectToAction("ShowHobby",  new { HobbyID =(int) EditHobby.HobbyID});
 
     }
-
-
-
 
     // LOGIN
     [HttpGet("Register")]
@@ -137,17 +132,6 @@ namespace BeltExam.Controllers
             return View("Hobbies");
         }
     }
-
-    // [HttpGet("GetAllUsers")]
-    // public string GetAllUsers()
-    // {
-    //     string[] AllUsers = dbContext.Users.Select(u=>u.FullName).ToArray();
-    //     var json = JsonConvert.SerializeObject(AllUsers);
-    //     // System.Console.WriteLine(json);
-    //     return  json;
-
-    // }
- 
     // [HttpGet("AddHobby/{HobbyID}")]
     [HttpPost]
     [Route("AddHobby")]
@@ -163,27 +147,6 @@ namespace BeltExam.Controllers
             return RedirectToAction("Hobbies");
         }
         
-    // [HttpGet("UNRSVP/{HobbyID}")]
-    // public IActionResult UNRSVP(int HobbyID) {
-        
-
-    //     RSVP rsvp = dbContext.Participants.FirstOrDefault(u=>u.HobbyID==HobbyID && u.UserId==this.LoggedInUserID);
-    //         dbContext.Participants.Remove(rsvp);
-    //         dbContext.SaveChanges();
-    //         return RedirectToAction("Hobbies");
-
-    //     }
-    // [HttpGet("CancelActivity/{HobbyID}")]
-    // public IActionResult CancelActivity(int HobbyID) {
-    //         RecActivity dead = dbContext.Activities.FirstOrDefault(r=>r.HobbyID==HobbyID);
-    //         if (dead!=null)
-    //         {
-    //             dbContext.Activities.Remove(dead);
-    //             dbContext.SaveChanges();
-    //         }
-    //         return RedirectToAction("Hobbies");
-
-    //     }
 
 ///@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ///

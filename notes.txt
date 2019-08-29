@@ -1,3 +1,5 @@
+            <form asp-action="EditHobby" asp-controller="Home" asp-route-id="@Model.HobbyID" method="post">
+    
     <form asp-action="AddHobby" asp-controller="Home"  asp-route-id=@Model.Proficiency method="post">
     <span class="text-danger" asp-validation-for="@Model.Proficiency"></span>
     <select asp-for="@Model.Proficiency">

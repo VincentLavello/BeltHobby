@@ -1,3 +1,4 @@
+@using BeltExam.Models;
 @model Hobby
 
 <div class="container">
@@ -11,13 +12,15 @@
     <table class="table table-bordered table-striped">
         <tbody>
             <div class="form-group">
-            <form asp-action="EditHobby" asp-controller="Home" asp-route-id="@Model.HobbyID" method="post">
+            <form asp-action="EditHobby" asp-controller="Home" method="post">
                 <br><label asp-for="@Model.HobbyTitle"></label><br>
                 <span class="text-danger" asp-validation-for="@Model.HobbyTitle"></span>
                 <input asp-for="@Model.HobbyTitle" value=@Model.HobbyTitle>
                 <br><label asp-for="@Model.Description"></label><br>
                 <span class="text-danger" asp-validation-for="@Model.Description"></span>
                 <textarea asp-for="@Model.Description">@Model.Description</textarea>
+                <input type="hidden" id="HobbyID" name="HobbyID" value=@Model.HobbyID>
+                <input type="hidden" id="Description" name="Description" value=@Model.Description>
                 <input value="Update" type="submit" >    
             </form>      
             </div></td>
