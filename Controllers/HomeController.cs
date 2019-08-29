@@ -90,7 +90,7 @@ namespace BeltExam.Controllers
 
         if ( ModelState.IsValid  )  {
      
-            dbContext.Hobbies.Add(EditHobby);
+            dbContext.Hobbies.Update(EditHobby);
             dbContext.SaveChanges();
         }
  
